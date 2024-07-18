@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
@@ -15,25 +14,28 @@ class HandleInertiaRequests extends Middleware
     protected $rootView = 'app';
 
     /**
-     * Determine the current asset version.
+     * Determines the current asset version.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string|null
      */
-    public function version(Request $request): string|null
+    public function version(Request $request)
     {
         return parent::version($request);
     }
 
     /**
-     * Define the props that are shared by default.
+     * Defines the props that are shared by default.
      *
-     * @return array<string, mixed>
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
      */
-    public function share(Request $request): array
+    public function share(Request $request)
     {
-        return [
-            ...parent::share($request),
-            'auth' => [
-                'user' => $request->user(),
-            ],
-        ];
+        return array_merge(parent::share($request), [
+            'errors' => function () use ($request) {
+                return $request->session()->get('errors') ? $request->session()->get('errors')->getBag('default')->getMessages() : (object) [];
+            },
+        ]);
     }
 }

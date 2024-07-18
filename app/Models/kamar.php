@@ -11,6 +11,17 @@ class kamar extends Model
     protected $table = 'kamar';
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'nama_kamar' ,
+        'status_kamar' , 
+        'fasilitas_kamar' ,
+        'panjang' ,
+        'lebar' , 
+        'tinggi',
+        'harga_kamar', 
+
+    ];
+
     public function getAll(){
         return $this->all();
     }

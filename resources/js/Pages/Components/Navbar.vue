@@ -16,16 +16,22 @@
         <Link href="/" >Dashboard</Link>
     </li>
     <li class="flex gap-3 text-lg ">
+
+        
         <span class="inline">
             <i class="fa-solid fa-bed fa-sm"></i>
         </span>
-        <Link href="/kamar">Kamar</Link>
+        <Link
+         @click="reloadPage"
+          href="/kamar">Kamar</Link>
     </li>
     <li class="flex gap-3 text-lg">
         <span class="inline" >
             <i class="fa-solid fa-user fa-sm"></i>
         </span>
-        User
+        <Link
+         @click="reloadPage"
+          href="/user">User</Link>
     </li>
     <li class="flex gap-3 text-lg">
         <span class="inline" >
@@ -42,7 +48,16 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3';
+import { createRouter, createWebHistory } from 'vue-router';
+const reloadPage = () =>{
+    // window.location.reload();
+    // window.location("/kamar");
+    // Inertia.reload().then(() => {
+    //             this.$router.push('/kamar'); 
+    // });
+}
 </script>
+
 
 
 <style scoped>

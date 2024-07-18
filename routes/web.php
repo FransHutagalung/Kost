@@ -8,21 +8,43 @@ use App\Http\Middleware\checkAdminSession;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Http\Controllers\Customer;
+use App\Http\Controllers\requestRoom;
+use App\Http\Controllers\user;
+use Illuminate\Http\Request;
 
 // Route::group([checkAdminSession::class], function () {
 //     Route::get('/', [Home::class, 'welcome']);
 // });
 Route::middleware([CheckAdminSession::class])->group(function () {
-    Route::get('/', [Home::class, 'welcome']);
-    Route::get('/kamar' , [Bedroom::class, 'index']);
+    Route::get('/', [Home::class, 'welcome'])->name('user.dashboard');
+    Route::get('/home', [Home::class, 'welcome']);
+
+    Route::get('/kamar' , [Bedroom::class, 'index'])->name('bedroom');
+    Route::post('/kamar/store' , [Bedroom::class, 'Store'])->name('bedroom.store');
+    Route::get('/kamar/{id}' , [Bedroom::class, 'detail'])->name('bedroom.detail'); ;
+
+    Route::get('/user' , [Customer::class, 'index'])->name('customer');
+
+
+    Route::get('/requestRoom' , [requestRoom::class, 'index'])->name('user');
+
 });
 
+// Route::post('/kamar/store' , [Bedroom::class, 'Store'])->name('bedroom.store');
 
-Route::get('/login' , function(){
-    return inertia::render('User/Login');
-})->name('login');
+Route::get('/user/login' , function(Request $request){
+    return inertia::render('User/Login' , [
+        'request' => $request
+    ]);
+})->name('user.login');
 
+Route::middleware(['web'])->group(function () {
+    Route::post('/user/signin', [user::class, 'sessionCreate'])->name('');
+});
+// Route::post('/user/signin' , [user::class , 'sessionCreate' ]);
+Route::post('/user/store' , [user::class , 'createUser' ]);
+Route::get('/user/signup' , [user::class , 'showRegisterForm' ])->name('user.register');
+Route::post('/user/create' , [user::class , 'create' ]);
+Route::get('/logout' , [user::class , 'logout'])->name('user.logout');
 
-Route::get('/user/signup' , [signin::class , 'showRegistrationForm' ]);
-Route::post('/user/create' , [signin::class , 'create' ]);

@@ -1,11 +1,11 @@
 <template>
-    <div class="flex flex-row h-full md:w-60 w-full mx-1 bg-white border border-black rounded-lg">
-       <diV class="w-2/5">
+    <div class="flex flex-row h-full md:w-[195px] w-full mx-1 bg-white border border-black rounded-lg">
+       <diV class="w-2/5 h-full">
         <img :src="url ?? altUrl" alt="">
        </diV>
        <div class="w-3/5 flex flex-col p-2">
-        <p class="font-bold">{{ nama }}</p>
-        <h1 class="text-3xl font-bold">{{ value ?? 0 }}</h1>
+        <p class="font-bold" :class="nama.length > 12 ? 'text-sm' : ''">{{ nama }}</p>
+        <h1 class="text-3xl font-bold" :class="nama.length > 12 ? 'mt-1' : ''">{{ value ?? 0 }}</h1>
        </div>
     </div>
 </template>
@@ -32,6 +32,6 @@ const props = defineProps({
 <style scoped>
 img{
     margin: 2px;
-    height: 100px;
+    height: 90%;
 }
 </style>

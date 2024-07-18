@@ -10,7 +10,7 @@
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-vue": "^5.0.0",
         "autoprefixer": "^10.4.12",
-        "axios": "^1.6.4",
+        "axios": "^1.7.2",
         "daisyui": "^4.12.10",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.31",
@@ -19,8 +19,14 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/vue3": "^1.2.0",
         "@vitejs/plugin-vue": "^5.0.5",
-        "flowbite": "^2.4.1"
+        "flowbite": "^2.4.1",
+        "flowbite-vue": "^0.1.5",
+        "inertia": "^0.0.7",
+        "pinia": "^2.1.7",
+        "vue-router": "^4.4.0"
     }
 }
