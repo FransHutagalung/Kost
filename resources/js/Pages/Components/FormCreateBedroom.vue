@@ -87,7 +87,7 @@
                                 <label for="">Kasur</label>
                             </div>
                         </div>
-                        <!-- <input type="file" ref="fileInput" @change="handleFileChange" accept="image/*"> -->
+                        <input type="file" ref="fileInput" @change="handleFileChange" accept="image/*">
                     </div>
 
                 </div>

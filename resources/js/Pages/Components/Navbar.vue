@@ -3,7 +3,7 @@
 <div class="flex flex-col gap-2 w-full py-5 ">
 
     <div class="flex flex-row w-full justify-center">
-        <img class="gambar" src="../Assets/kamar.png" alt="">
+        <img class="gambar" src="../Assets/kostlogo.png" alt="">
     </div>
 
 <div class="h-10"></div>
@@ -15,15 +15,22 @@
         </span>
         <Link href="/" >Dashboard</Link>
     </li>
-    <li class="flex gap-3 text-lg ">
-
-        
+    <li class="flex gap-3 text-lg "> 
         <span class="inline">
             <i class="fa-solid fa-bed fa-sm"></i>
         </span>
         <Link
          @click="reloadPage"
           href="/kamar">Kamar</Link>
+    </li>
+    <li class="flex gap-3 text-lg ">
+        <span class="inline">
+            <i class="fa-solid fa-bell fa-sm"></i>
+        </span>
+        <Link
+         @click="reloadPage"
+          href="/request">Request Kamar</Link>
+          <p class="text-sm text-red-700 font-bold">{{ props.notif ?? '2' }}</p>
     </li>
     <li class="flex gap-3 text-lg">
         <span class="inline" >
@@ -37,7 +44,7 @@
         <span class="inline" >
             <i class="fa-regular fa-credit-card fa-sm"></i>
         </span>
-        Transaksi
+        <Link href="/transaksi">Transaksi</Link>
     </li>
 </ul>
 </div>
@@ -49,12 +56,13 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import { createRouter, createWebHistory } from 'vue-router';
+const props = defineProps({
+    notif : {
+        type : Number
+    }
+})
 const reloadPage = () =>{
-    // window.location.reload();
-    // window.location("/kamar");
-    // Inertia.reload().then(() => {
-    //             this.$router.push('/kamar'); 
-    // });
+
 }
 </script>
 

@@ -3,7 +3,10 @@
 <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
   <div class="flex justify-between mb-5">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">Rp . 0</h5>
+      <div class="flex gap-2">
+        <p>Rp . </p>
+        <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-2"> {{ props.transaksi }}</h5>
+      </div>
       <p class="text-base font-normal text-gray-500 dark:text-gray-400">Transaksi Masuk Hari Ini</p>
     </div>
     <div
@@ -64,7 +67,13 @@
 </template>
 
 
-<script>
+<script setup>
+import { defineProps } from 'vue';
+const props = defineProps({
+  transaksi : {
+    type : Number
+  }
+})
 
 const options = {
 // add data series via arrays, learn more here: https://apexcharts.com/docs/series/

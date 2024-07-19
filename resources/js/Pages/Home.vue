@@ -44,16 +44,16 @@
                           <carousel />
                            <div class=" gambarbawah flex mt-3 w-full gap-2 h-1/3 ">
                             <div class="w-13 h-13">
-                                <img src="./Assets/rumah2.jpg" alt="">
+                                <img class="gbr" src="./Assets/rumah2.jpg" alt="">
                             </div>
                             <div class="w-13 h-13">
-                                <img src="./Assets/rumah3.jpg" alt="">
+                                <img class="gbr" src="./Assets/rumah3.jpg" alt="">
                             </div>
                             <div class="w-13 h-13">
-                                <img src="./Assets/rumah4.jpg" alt="">
+                                <img class="gbr" src="./Assets/rumah4.jpg" alt="">
                             </div>
                             <div class="w-13 h-13">
-                                <img src="./Assets/rumah1.jpg" alt="">
+                                <img class="gbr" src="./Assets/rumah1.jpg" alt="">
                             </div>
                            </div>
                         </div>
@@ -68,10 +68,15 @@
                    <ChildDashboard :nama="parentMessage3" :url="gambar3"/>
                 </div>
                 <div class="flex flex-col h-full w-full px-2 py-5">
-                    <div class="flex flex-row h-60">
+                    <div class="flex flex-row gap-3 h-60">
                         <div class="w-60 h-full">
-                        <Chart1 />
-                    </div>
+                        <Chart1
+                        :transaksi="transaksi"
+                        />
+                         </div>
+                         <div class="w-60 h-60">
+                            <Chart2 />
+                         </div>
                     </div>
                     <div class="my-2 flex gap-2">
                        
@@ -93,6 +98,8 @@
 </template>
 
 <script setup>
+import { initFlowbite } from 'flowbite'
+import { onMounted } from 'vue';
 import Navbar from './Components/Navbar.vue';
 import gambar1 from './Assets/kamar3.png'
 import gambar2 from './Assets/customer.png'
@@ -105,6 +112,7 @@ import Contact from './Components/Contact.vue';
 import { defineProps , ref } from 'vue';
 import Chart1 from './Components/Chart1.vue';
 import { Link } from '@inertiajs/vue3';
+import Chart2 from './Components/Chart2.vue';
 
 
 const props = defineProps({
@@ -118,13 +126,16 @@ const props = defineProps({
 const parentMessage1 = "Total Kamar"
 const parentMessage2 = "Total Customer"
 const parentMessage3 = "Total Pegawai"
+const transaksi = ref(323000)
 
-
+onMounted(() => {
+    initFlowbite();
+})
 </script>
 
 <style scoped>
 .gambarbawah img{
-    width: 100%;
-    height: 100%
+    width: 100px;
+    height: 100px;
 }
 </style>

@@ -23,8 +23,10 @@
 
                 <div v-if="isExist" class="w-full p-2 h-auto flex flex-row flex-wrap gap-5 mt-3 ">
                     <div v-for="(data, index) in props.dataAll" :key="index" class="w-60 h-60  ">
-                    <Bedroom :data="data" />
-                    <!-- <p>{{ data }}</p> -->
+                    <Bedroom 
+                    :data="data"
+                    :defaultImageUrl="gambarDefault"
+                    />
                     </div>
                 </div>
                 <div v-else class="flex w-full h-screen">
@@ -51,6 +53,9 @@
 </template>
 
 <script setup>
+import { initFlowbite } from 'flowbite'
+import gambarDefault from './Assets/default.jpg'
+import { onMounted } from 'vue';
 import Navbar from './Components/Navbar.vue';
 import { defineProps , ref } from 'vue';
 import FormCreateBedroom from './Components/FormCreateBedroom.vue';
@@ -69,7 +74,9 @@ const props = defineProps({
 
 console.log(props.dataAll)
 
-
+onMounted(() => {
+    initFlowbite();
+})
 
 </script>
 
