@@ -14,11 +14,16 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
+    // ->wi
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
+
+        // $middleware->append([
+        //     'isLogedIn' => \App\Http\Middleware\CheckAdminSession::class,
+        // ]);
 
         $middleware->web(append: [
             HandleInertiaRequests::class,

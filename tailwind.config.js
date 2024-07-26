@@ -16,7 +16,10 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                'sans': ['Inter', 'Roboto', 'sans-serif'],
+                'serif': ['Merriweather', 'serif'],
+                'mono': ['Menlo', 'monospace'],
+                "Poppins" : ["Poppins", "sans-serif"]
             },
 
             colors: {

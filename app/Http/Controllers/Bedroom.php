@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 use App\Models\kamar;
 class Bedroom extends Controller
 {
@@ -21,8 +22,8 @@ class Bedroom extends Controller
 
     public function detail($id){
         $kamar = kamar::find($id);
-        dd($kamar);
-        return inertia::render('BedroomDetail',[
+        $kamar->fasilitas_kamar = json_decode($kamar->fasilitas_kamar, true);
+        return inertia::render('Bedroom/BedroomDetail',[
             'data' => $kamar
         ]);
     }
@@ -31,6 +32,11 @@ class Bedroom extends Controller
         return kamar::count();
     }
 
+    public function Destroy($id){
+        $bedroom =  kamar::find($id);
+        $bedroom->delete();
+        return redirect()->back();
+    }
 
 
 
@@ -38,13 +44,15 @@ class Bedroom extends Controller
     {
     // dd($request);
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif',
             'nama_kamar' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'panjang' => 'required|numeric',
             'lebar' => 'required|numeric',
             'tinggi' => 'required|numeric',
-            'harga' => 'required|numeric',
+            'harga_bulan' => 'required|numeric',
+            'harga_6bulan' => 'required|numeric',
+            'harga_tahun' => 'required|numeric',
             'status' => 'required|string',
             'fasilitas' => 'required|array',
         ]);
@@ -56,17 +64,21 @@ class Bedroom extends Controller
 
             $kamar = new Kamar();
             $kamar->nama_kamar = $request->nama_kamar;
+            $kamar->kode_kamar = Str::random(5);
             $kamar->deskripsi = $request->deskripsi;
-            $kamar->harga_kamar = $request->harga;
+            $kamar->harga_bulan = $request->harga_bulan;
+            $kamar->harga_6bulan = $request->harga_6bulan;
+            $kamar->harga_tahun = $request->harga_tahun;
             $kamar->status_kamar = $request->status;
             $kamar->panjang = $request->panjang;
             $kamar->lebar = $request->lebar;
             $kamar->tinggi = $request->tinggi;
-            $kamar->path = $path; // Save the path to the database
+            $kamar->path = $path ?? ' '; // Save the path to the database
             $kamar->fasilitas_kamar = json_encode($request->fasilitas);
             $kamar->save();
-            return back()->with('success', 'Kamar berhasil ditambahkan.');
+            return redirect()->back()->with('success', 'Data kamar berhasil ditambahkan.');
         } else {
+            dd('gak ada');
 
             return redirect()->back()->with('error', 'File gambar tidak ditemukan atau tidak valid.');
         }

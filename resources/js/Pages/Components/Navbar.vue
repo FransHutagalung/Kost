@@ -13,7 +13,7 @@
         <span class="inline">
             <i class="fa-solid fa-chart-simple fa-sm"></i>
         </span>
-        <Link href="/" >Dashboard</Link>
+        <Link href="/admin" >Dashboard</Link>
     </li>
     <li class="flex gap-3 text-lg "> 
         <span class="inline">
@@ -21,7 +21,7 @@
         </span>
         <Link
          @click="reloadPage"
-          href="/kamar">Kamar</Link>
+          href="/admin/kamar">Kamar</Link>
     </li>
     <li class="flex gap-3 text-lg ">
         <span class="inline">
@@ -29,7 +29,7 @@
         </span>
         <Link
          @click="reloadPage"
-          href="/request">Request Kamar</Link>
+          href="/admin/request">Request Kamar</Link>
           <p class="text-sm text-red-700 font-bold">{{ props.notif ?? '2' }}</p>
     </li>
     <li class="flex gap-3 text-lg">
@@ -38,13 +38,13 @@
         </span>
         <Link
          @click="reloadPage"
-          href="/user">User</Link>
+          href="/admin/user">User</Link>
     </li>
     <li class="flex gap-3 text-lg">
         <span class="inline" >
             <i class="fa-regular fa-credit-card fa-sm"></i>
         </span>
-        <Link href="/transaksi">Transaksi</Link>
+        <Link href="/admin/transaksi">Transaksi</Link>
     </li>
 </ul>
 </div>
