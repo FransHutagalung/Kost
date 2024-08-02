@@ -18,11 +18,13 @@ class CheckAdminSession
     public function handle($request, Closure $next)
     {
         // Pemeriksaan apakah pengguna memiliki session admin
-        if (!Auth::guard('web')->check()) {
-            // Jika tidak ada session admin, arahkan ke halaman login atau tindakan lain
+        if (!Auth::guard('Admin')->check() ) {
+            if(Auth::guard('Admin')->user()->type != 'admin'){
+                return redirect()->route('user.login');
+            }
             return redirect()->route('user.login');
         }
-        
+        // dd(Auth::guard('Admin')->user()->type);
         // Lanjutkan permintaan jika session admin ada
         // dd('gak ada');
         return $next($request);

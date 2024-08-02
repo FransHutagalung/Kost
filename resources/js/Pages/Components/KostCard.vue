@@ -5,7 +5,7 @@
             <div class="w-full flex h-full">
                 <div class="w-1/3 pt-5">
                     <img src="../Assets/kostlogo.png" alt="">
-                    <button class="bg-blue-500 rounded-xl w-full h-8">Edit Data</button>
+                    <button @click="kostInfo" class="bg-blue-500 rounded-xl w-full h-8">Edit Data</button>
                 </div>
                 <div class="flex w-2/3 flex-row p-2 gap-2">
                      <div class="w-1/3 flex flex-col gap-2 ">
@@ -30,5 +30,12 @@
 </template>
 
 <script setup>
+import { router } from '@inertiajs/vue3';
+
+
+const kostInfo = () => {
+    // console.log('kost info')
+    router.get('/admin/informasikost')
+}
 
 </script>

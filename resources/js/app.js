@@ -8,6 +8,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { createPinia } from 'pinia';
 import VueApexCharts from 'vue3-apexcharts';
 import { initFlowbite } from 'flowbite';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Projec Kostan';
 
@@ -16,9 +17,11 @@ createInertiaApp({
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         const pinia = createPinia();
+        pinia.use(piniaPluginPersistedstate);
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(pinia)
+            // .use(piniaPluginPersistedstate)
             .use(initFlowbite)
             .use(VueApexCharts)
             .use(ZiggyVue)

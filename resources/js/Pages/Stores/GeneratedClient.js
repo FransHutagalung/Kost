@@ -1,19 +1,34 @@
+// Stores/GeneratedClient.js
 import { defineStore } from "pinia";
 
-export const data = defineStore("data", {
+export const useDataStore = defineStore("data", {
     state: () => ({
-        data: {
-            name: "",
+        user: {
+            name: '',
+            id: null,
         },
+        isLogin: false,
     }),
     actions: {
-        setData(data) {
-            this.data = data;
+        setUser(user) {
+            this.user = user;
         },
+        setLogin(status) {
+            this.isLogin = status;
+        }
     },
     getters: {
-        getData() {
-            return this.data;
+        getUser(state) {
+            return state.user;
         },
-    },
-})
+        getLoginStatus(state) {
+            return state.isLogin;
+        } , 
+        getUserName(state) {
+            return state.user.name;
+        }
+    } ,
+    persist: {
+        enabled: true
+    }
+});

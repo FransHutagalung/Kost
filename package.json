@@ -29,6 +29,7 @@
         "flowbite-vue": "^0.1.5",
         "inertia": "^0.0.7",
         "pinia": "^2.1.7",
+        "pinia-plugin-persistedstate": "^3.2.1",
         "vue-apexcharts": "^1.6.2",
         "vue-router": "^4.4.0",
         "vue3-apexcharts": "^1.5.3"

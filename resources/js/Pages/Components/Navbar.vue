@@ -28,7 +28,6 @@
             <i class="fa-solid fa-bell fa-sm"></i>
         </span>
         <Link
-         @click="reloadPage"
           href="/admin/request">Request Kamar</Link>
           <p class="text-sm text-red-700 font-bold">{{ props.notif ?? '2' }}</p>
     </li>

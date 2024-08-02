@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title>Aplikasi Kost </title>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>

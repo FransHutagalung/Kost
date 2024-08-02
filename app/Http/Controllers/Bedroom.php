@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FasilitasGedung;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use App\Models\kamar;
+use Illuminate\Support\Facades\Auth;
+
 class Bedroom extends Controller
 {
     //
@@ -22,9 +25,23 @@ class Bedroom extends Controller
 
     public function detail($id){
         $kamar = kamar::find($id);
-        $kamar->fasilitas_kamar = json_decode($kamar->fasilitas_kamar, true);
-        return inertia::render('Bedroom/BedroomDetail',[
-            'data' => $kamar
+        $fasilitas = FasilitasGedung::all();
+        $kamar->fasilitas_kamar = json_decode
+        ($kamar->fasilitas_kamar, true);
+            return inertia::render('Bedroom/BedroomDetail',[
+                'data' => $kamar
+            ]);
+        
+    }
+
+    public function detailBedroomFromUser($id){
+        $kamar = kamar::find($id);
+        $fasilitas = FasilitasGedung::all();
+        $kamar->fasilitas_kamar = json_decode
+        ($kamar->fasilitas_kamar, true);
+        return inertia::render('Partial/BedroomDetail',[
+            'data' => $kamar  ,
+            'fasilitas' => $fasilitas
         ]);
     }
 

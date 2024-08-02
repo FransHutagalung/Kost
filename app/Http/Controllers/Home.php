@@ -12,8 +12,9 @@ class Home extends Controller
     
      public function welcome(){
         $kamar = kamar::all();
-        $user = Auth::user();
+        $user = Auth::guard('Admin')->user();
         // dd($user->name);
+        // dd($user);
         return Inertia::render('Home' , [ 
           'user' => $user,
           'kamar' => $kamar , 

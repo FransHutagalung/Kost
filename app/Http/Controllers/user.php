@@ -39,23 +39,14 @@ class user extends Controller
                 'name' => ['required', 'string', 'max:255', ],
                 'password' => ['required', 'string', 'min:8', ],
             ]);
-
-            // $user = us::where('name', $credential['name'])->first();
-            if(Auth::attempt($credential)){
+            if(Auth::guard('Admin')->attempt($credential)){
+               if(Auth::guard('Admin')->user()->type == 'admin'){
                 return redirect()->route('user.dashboard');
+               }
+               return redirect()->route('user.login'  , [
+                'status' => 'Kesalahan Login',      
+            ]);
             }
-            // if($user){
-            //     // dd('ada');
-            //     if(Hash::check($credential['password'], $user->password)){
-            //         $_SESSION['admin'] = $user->name;
-            //        return redirect()->route('user.dashboard');
-            //     }
-            //     return redirect()->route('user.login' , 
-            //     [
-            //         'status' => 'Password Salah',
-            //     ]);
-            // }
-            
             return redirect()->route('user.login'  , [
                 'status' => 'Kesalahan Login',      
             ]);
@@ -65,7 +56,7 @@ class user extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/admin');
     }
 
 
