@@ -63,9 +63,13 @@
                     </div>
                 </div>
                 <div class="w-[40%]  p-4 h-full">
-                    <KostAction :harga="{harga_bulan : data.harga_bulan, 
+                    <KostAction
+                    @checkout="checkout"
+                    :harga="{
+                    harga_bulan : data.harga_bulan, 
                     harga_6bulan : data.harga_6bulan, 
-                    harga_tahun : data.harga_tahun}"/>
+                    harga_tahun : data.harga_tahun}"
+                    />
                 </div>
               </div>
           </div>
@@ -80,6 +84,8 @@ import RentFacility from './RentFacility.vue';
 import SearchKost from './SearchKost.vue';
 import Map from './Map.vue';
 import { defineProps } from 'vue';
+import { router } from '@inertiajs/vue3';
+import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
     data : {
@@ -90,7 +96,24 @@ const props = defineProps({
     }
 })
 
-console.log(props.data)
-console.log(props.fasilitas)
+
+const encodeBase64 = (str) => {
+    return btoa(str);
+};
+
+const checkout = async (data) => {
+
+    const encodedId = encodeBase64(props.data.id.toString());
+    
+    const queryParams = new URLSearchParams({
+        // selectedPrice: data.selectedPrice,
+        selectedPackage: JSON.stringify(data.selectedPackage),
+        UID: encodedId,
+    });
+
+    const url = route('checkout') + '?' + queryParams.toString();
+
+    window.open(url, '_blank');
+}
 
 </script>

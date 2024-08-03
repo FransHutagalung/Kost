@@ -16,7 +16,9 @@
             </select>
         </div>
         <div class="w-full flex justify-center items-center flex-col gap-3">
-            <button class="rounded-lg w-[90%] h-10 flex items-center justify-center bg-blue-400">Pesan Sekarang</button>
+            <button 
+            @click="handleCheckout"
+            class="rounded-lg w-[90%] h-10 flex items-center justify-center bg-blue-400">Pesan Sekarang</button>
             <button class="rounded-lg w-[90%] h-10 flex items-center justify-center bg-gray-200">Ajukan Pengecekan</button>
         </div>
     </div>
@@ -24,13 +26,36 @@
 
 
 <script setup>
-import { defineProps, reactive, ref } from 'vue';
+import { defineProps, reactive, ref , defineEmits, computed } from 'vue';
 
 const props = defineProps({
     harga: {
         type: Object
     }
 });
+// console.log(props.harga)
+
+const emit = defineEmits(['checkout']);
+
+
+const paket = computed(() => {
+    if(selectedPrice.value === props.harga.harga_bulan){ 
+        return 'A';
+    }else if (selectedPrice.value === props.harga.harga_6bulan){
+        return 'B';
+    }else if (selectedPrice.value === props.harga.harga_tahun){
+        return 'C';
+    }
+})
+
+const handleCheckout = () => {
+    console.log(paket.value)
+    const data = {
+        selectedPrice : selectedPrice.value,
+        selectedPackage : paket.value
+    }
+    emit('checkout' , data);
+};
 
 const harga = reactive(props.harga);
 const selectedPrice = ref(harga.harga_bulan);

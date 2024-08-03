@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Str;
 use App\Models\kamar;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\Cast\String_;
 
 class Bedroom extends Controller
 {
@@ -54,6 +55,20 @@ class Bedroom extends Controller
         $bedroom->delete();
         return redirect()->back();
     }
+
+
+    public function checkOut(Request $request){
+        $encodedId = $request->query('uid');
+        $selectedRoomId = base64_decode($encodedId);
+        $kamar = kamar::find($selectedRoomId);
+        $selectedPackage = json_decode($request->query('selectedPackage'), true);
+        // dd(gettype($selectedPackage));
+        return Inertia::render('Partial/Checkout', [
+            'kamar' => $kamar, 
+            'selectedPackage' => $selectedPackage
+        ]);
+    }
+    
 
 
 

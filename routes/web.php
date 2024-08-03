@@ -61,3 +61,4 @@ Route::get('/logout' , [user::class , 'logout'])->name('user.logout');
 
 
 Route::get('/bedroom/detail/{id}' , [Bedroom::class, 'detailBedroomFromUser'])->name('bedroom.userdetail');
+Route::get('/checkoutbedroom' , [Bedroom::class, 'checkout'])->name('checkout');
